@@ -53,12 +53,12 @@ def calc_top_candidates(votes):
     max_num_iterations = len(votes[0])
 
     # step 4
-    for i in range(1, max_num_iterations):
+    for i in range(max_num_iterations):
         # step 1
         top_candidates = calc_golf_scores(votes)
         for candidate in top_candidates:
             # step 2
-            sorted_candidates.append((candidate, i))
+            sorted_candidates.append((candidate, i + 1))
 
             # step 3
             votes = remove_candidate_from_votes(votes, candidate)
