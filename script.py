@@ -7,7 +7,7 @@ votes = [[]] # list of pref lists
     calculates golf scores for a given input of votes
     returns top candidate(s) with lowest score
 '''
-def calc_golf_scores(votes):
+def calc_top_candidates(votes):
     candidates = defaultdict(int) # key: candidate name, value: score
     # sum scores
     for vote in votes:
@@ -29,7 +29,7 @@ def calc_golf_scores(votes):
     return top_candidates
 
 '''
-    calc_top_candidates takes in a list of votes and returns an ordered list of 
+    calc_candidate_ordering takes in a list of votes and returns an ordered list of 
     (candidate name, which round they got selected).
 
     selection algorithm:
@@ -38,7 +38,7 @@ def calc_golf_scores(votes):
     (3) update people's rankings by removing these candidates from their rankings
     (4) repeat steps 2-3 until no candidates remain 
 '''
-def calc_top_candidates(votes):
+def calc_candidate_ordering(votes):
     # helper function to remove selected candidates 
     def remove_candidate_from_votes(votes, candidate):
         for vote in votes:
@@ -55,7 +55,7 @@ def calc_top_candidates(votes):
     # step 4
     for i in range(max_num_iterations):
         # step 1
-        top_candidates = calc_golf_scores(votes)
+        top_candidates = calc_top_candidates(votes)
         for candidate in top_candidates:
             # step 2
             sorted_candidates.append((candidate, i + 1))
@@ -69,7 +69,7 @@ def calc_top_candidates(votes):
 
     return sorted_candidates
         
-candidate_ordering = calc_top_candidates(votes)
+candidate_ordering = calc_candidate_ordering(votes)
 print(candidate_ordering)
 
 
@@ -79,12 +79,12 @@ print(candidate_ordering)
 def run_all_tests():
     def test1():
         votes = [["apple", "bob", "cat", "dog"], ["cat", "dog", "apple", "bob"]]
-        candidate_ordering = calc_top_candidates(votes)
+        candidate_ordering = calc_candidate_ordering(votes)
         print(candidate_ordering)
 
     def test2():
         votes = [["apple", "bob", "cat", "dog"], ["cat", "dog", "apple", "bob"], ["apple", "bob", "cat", "dog"]]
-        candidate_ordering = calc_top_candidates(votes)
+        candidate_ordering = calc_candidate_ordering(votes)
         print(candidate_ordering)
 
     test1()
